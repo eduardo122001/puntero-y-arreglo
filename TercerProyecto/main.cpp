@@ -50,18 +50,27 @@ void invertir(int *a,int tam){
 
 }
 
-void invertirRec(int *a,int tam){
-    if((a=a+tam)||(a+tam+1==a))
-        return;
-    else{
-        cambiop(a+tam-1,a);
-        return invertirRec(++a,tam-1);
-
+void invertirRec1(int *a,int tam){
+    --tam;
+    if(tam>1){
+        cambiop(a+tam,a);
+        return invertirRec1(++a,--tam);
     }
+
 
 }
 
+void invertirRec2(int *a,int tam){
+    --tam;
+    if(a+1==a+tam-1){
+        cambiop(a+tam,a);
+        return;}
+    else{
+        cambiop(a+tam,a);
+        return invertirRec2(++a,--tam);
 
+}
+}
 /*void burbuja(int *a,int tam){
     for(int i=0;i==tam;++i){
         for(int j=0;j==tam-i;j++){
@@ -117,7 +126,7 @@ int main()
     int a=5;
 
     int m[]={1,2,3,4,5};
-    invertirRec(m,a);
+    invertirRec2(m,a);
     imprimir(m,a);
     //int t=SumaRec(m,a);
     //cout<<t;
