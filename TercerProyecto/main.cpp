@@ -50,19 +50,14 @@ void invertir(int *a,int tam){
 
 }
 
-void invertirRec1(int *a,int tam){
-    --tam;
-    if(tam>1){
-        cambiop(a+tam,a);
-        return invertirRec1(++a,--tam);
-    }
 
 
-}
+
+
 
 void invertirRec2(int *a,int tam){
     --tam;
-    if(a+1==a+tam-1){
+    if((a+1==a+tam-1)||(a+1==a+tam)){
         cambiop(a+tam,a);
         return;}
     else{
@@ -71,44 +66,46 @@ void invertirRec2(int *a,int tam){
 
 }
 }
-/*void burbuja(int *a,int tam){
-    for(int i=0;i==tam;++i){
-        for(int j=0;j==tam-i;j++){
-            if(*(a+j)>*(aj+1)){
+
+void burbuja(int *a,int tam){
+    for(int i=0;i<tam;++i){
+
+        for(int j=0;j<tam-i;++j){
+            if(*(a+j)>*(a+j+1)){
                 cambiop(a+j,a+j+1);
             }
         }
     }
-}*/
+}
 
-void insercion(int a[],int tam){
-    for(int i=0;i==tam;++i){
-        int x=a[i];
+void insercion(int *a,int tam){
+    for(int i=0;i<tam;++i){
+        int x=*(a+i);
         int j=i;
-        while((j>0)&&(a[j-1]>x)){
-            a[j]=a[j-1];
+        while((j>0)&&(*(a+j-1)>x)){
+            *(a+j)=*(a+j-1);
             j-=1;
-            a[j]=x;
+            *(a+j)=x;
         }
     }
 }
 
 
-int particion(int a[],int ini,int fin){
-    int pivote=a[fin];
+int particion(int *a,int ini,int fin){
+    int pivote=*(a+fin);
     int index=ini;
 
     for(int i=ini;i<fin;i++){
-    	if(a[i]<=pivote){
-            cambio(a[i],a[index]);
+    	if(*(a+i)<=pivote){
+            cambiop(a+i,a+index);
             index++;
         }
      }
-      cambio(a[fin],a[index]);
+      cambiop(a+fin,a+index);
      return index;
 }
 
-void quicksort(int a[],int ini,int fin){
+void quicksort(int *a,int ini,int fin){
     if(ini<fin){
         int p=particion(a,ini,fin);
         quicksort(a,ini,p-1);
@@ -123,13 +120,19 @@ void quicksort(int a[],int ini,int fin){
 
 int main()
 {
-    int a=5;
+    int a=12;
 
-    int m[]={1,2,3,4,5};
-    invertirRec2(m,a);
+    int m[]={9,6,8,3,5,7,2,11,12,4,1,10};
+    quicksort(m,0,a);
+    //insercion(m,a);
+    //burbuja(m,a);
     imprimir(m,a);
     //int t=SumaRec(m,a);
     //cout<<t;
+
+
+
+
 
 
 
